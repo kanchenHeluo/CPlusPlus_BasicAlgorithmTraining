@@ -103,21 +103,36 @@ class Key_t {
 	size_t operator () (const MapNode& t) const {
 		return t.val;
 	}
-	
-	bool operator() (const MapNode&a, const MapNode&b) const {
-		return a.val < b.val;
-	}
 };
+void mapDemo(){
+	cout << "map:" << endl;
+	map<string, int> m;
+	m["a"] = 1;
+	m.insert(make_pair<string, int>("b",2));
+	cout << m.size() << endl;
+	map<string, int>::iterator iter;
+	iter = m.find("b");
+	if(iter!=m.end()){
+		cout << iter->first << ":" << iter->second << endl;
+	}
+}
 
 void hashmapDemo(){
+	cout << "hash map:" << endl;
 	hash_map<MapNode, int, Key_t> m;
 	MapNode n1(1), n2(2);
 	m.insert(make_pair(n1,1));
 	typedef pair<MapNode, int> MapPair;
-	m.insert(MapPair(n1,1));
+	m.insert(MapPair(n2,2));
 	hash_map<MapNode, int, Key_t>::iterator iter;
+	cout << m.size() << endl;
 	for(iter=m.begin(); iter!=m.end(); iter++){
 		cout << iter->first.val << "," << iter->second << endl;
+	}
+
+	iter = m.find(n1);
+	if(iter!=m.end()){
+		cout << iter->first.val << ":" << iter->second << endl;
 	}
 }
 
@@ -128,6 +143,7 @@ int main(){
 		cout << arr[i] << ",";
 	}
 	cout << endl;
+	mapDemo();
 	hashmapDemo();
 	vectorDemo();
 	dequeDemo();
